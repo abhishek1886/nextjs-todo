@@ -10,7 +10,13 @@ const TodoItem = (props) => {
   const updateTodoHandler = async () => {
     setDone(true);
 
-    const response = await fetch("/api/update-todo", {
+    let url = 'http://localhost:3000';
+    const vc = process.env.VERCCEL_URL;
+    if(vc){
+      url = `http://${vc}`
+    }
+
+    const response = await fetch(`${url}/api/update-todo`, {
       method: "POST",
       body: JSON.stringify({
         title: props.title,

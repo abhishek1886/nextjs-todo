@@ -28,7 +28,12 @@ const CompletedTodos = (props) => {
 };
 
 export async function getStaticProps() {
-  const response = await fetch("/api/todo-data");
+  let url = 'http://localhost:3000';
+    const vc = process.env.VERCEL_URL;
+    if(vc){
+      url = `http://${vc}`
+    }
+  const response = await fetch(`${url}/api/todo-data`);
 
   const res = await response.json();
   const data = res.data;

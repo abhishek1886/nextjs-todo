@@ -6,10 +6,16 @@ import Todo from "@/components/Todo";
 export default function Home(props) {
   const [todos, setTodos] = useState([]);
 
+  let url = 'http://localhost:3000';
+    const vc = process.env.VERCCEL_URL;
+    if(vc){
+      url = `http://${vc}`
+    }
+
   const addTodoHandler = async (todoData) => {
     const data = { title: todoData, isCompleted: false };
 
-    const response = await fetch("/api/add-todo", {
+    const response = await fetch(`${url}/api/add-todo`, {
       method: "POST",
       body: JSON.stringify({ title: todoData, isCompleted: false }),
       headers: {
@@ -29,7 +35,7 @@ export default function Home(props) {
     const updatedData = todos.filter(todo => todo.id !== id);
     setTodos(updatedData);
 
-    const response = await fetch('/api/delete-todo', {
+    const response = await fetch(`${url}/api/delete-todo`, {
       method: "DELETE",
       body: JSON.stringify({ id: id}),
       headers: {
@@ -56,7 +62,12 @@ export default function Home(props) {
 }
 
 export async function getStaticProps() {
-  const response = await fetch("/api/todo-data");
+  let url = 'http://localhost:3000';
+    const vc = process.env.VERCEL_URL;
+    if(vc){
+      url = `http://${vc}`
+    }
+  const response = await fetch(`${url}/api/todo-data`);
 
   const res = await response.json();
   const data = res.data;
