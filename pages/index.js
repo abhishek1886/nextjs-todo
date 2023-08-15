@@ -51,11 +51,11 @@ export default function Home(props) {
       <Header />
 
       <main>
-        <Todo
+        {todos.length > 0 ? <Todo
           onClick={addTodoHandler}
           todoData={todos}
           onDelete={deleteTodoHandler}
-        />
+        /> : <p>Please add todos.</p>}
       </main>
     </Fragment>
   );
