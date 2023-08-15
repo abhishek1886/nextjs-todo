@@ -10,7 +10,7 @@ const TodoItem = (props) => {
   const updateTodoHandler = async () => {
     setDone(true);
 
-    let url = 'https://nextjs-todo-qgx1a733u-abhishek1886.vercel.app/';
+    let url = 'https://nextjs-todo-abhishek1886.vercel.app/';
     const vc = process.env.VERCCEL_URL;
     if(vc){
       url = `http://${vc}`

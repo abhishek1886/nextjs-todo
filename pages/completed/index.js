@@ -11,7 +11,7 @@ const CompletedTodos = (props) => {
   }, []);
 
   const deleteTodoHandler = async (id) => {
-    const url = "https://nextjs-todo-qgx1a733u-abhishek1886.vercel.app/";
+    const url = "https://nextjs-todo-abhishek1886.vercel.app/";
     const updatedData = completedTodos.filter((todo) => todo.id !== id);
     setCompletedTodos(updatedData);
 

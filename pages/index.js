@@ -7,7 +7,7 @@ import Todo from "@/components/Todo";
 export default function Home(props) {
   const [todos, setTodos] = useState([]);
 
-  let url = "https://nextjs-todo-qgx1a733u-abhishek1886.vercel.app/"; //https://nextjs-todo-qgx1a733u-abhishek1886.vercel.app/
+  let url = "https://nextjs-todo-abhishek1886.vercel.app/"; //https://nextjs-todo-qgx1a733u-abhishek1886.vercel.app/
   const vc = process.env.VERCCEL_URL;
   if (vc) {
     url = `http://${vc}`;
