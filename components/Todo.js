@@ -41,7 +41,7 @@ const Todo = (props) => {
       </div>
       <div className="h-100 w-full flex items-center justify-center bg-teal-lightest font-sans">
           <div className="bg-white rounded shadow p-6 m-4 w-full lg:w-3/4 lg:max-w-lg">
-            {props.todoData ? <ul>{todoListItem}</ul> : <p>Please add todo items.</p>}
+            {props.todoData.length > 0 ? <ul>{todoListItem}</ul> : <p>Please add todo items.</p>}
           </div>
         </div>
     </Fragment>
