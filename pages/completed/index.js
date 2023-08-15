@@ -1,6 +1,7 @@
 import { MongoClient } from "mongodb";
 import React, { Fragment, useEffect, useState } from "react";
 import Header from "@/components/Header";
+import TodoItem from "@/components/TodoItem";
 
 const CompletedTodos = (props) => {
   const [completedTodos, setCompletedTodos] = useState([]);
