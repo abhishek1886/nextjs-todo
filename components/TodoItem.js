@@ -29,7 +29,6 @@ const TodoItem = (props) => {
     });
 
     const data = await response.json();
-    console.log(data);
   };
 
   const deleteTodoHandler = () => {

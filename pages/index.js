@@ -7,6 +7,12 @@ import Todo from "@/components/Todo";
 export default function Home(props) {
   const [todos, setTodos] = useState([]);
 
+  let url = "http://localhost:3000";
+  const vc = process.env.VERCCEL_URL;
+  if (vc) {
+    url = `http://${vc}`;
+  }
+
   const addTodoHandler = async (todoData) => {
     const data = { title: todoData, isCompleted: false };
 
@@ -27,18 +33,17 @@ export default function Home(props) {
   }, []);
 
   const deleteTodoHandler = async (id) => {
-    const updatedData = todos.filter(todo => todo.id !== id);
+    const updatedData = todos.filter((todo) => todo.id !== id);
     setTodos(updatedData);
 
     const response = await fetch(`${url}/api/delete-todo`, {
       method: "DELETE",
-      body: JSON.stringify({ id: id}),
+      body: JSON.stringify({ id: id }),
       headers: {
-        "Content-Type": "application/json"
-      }
-    })
+        "Content-Type": "application/json",
+      },
+    });
     const data = await response.json();
-    console.log(data);
   };
 
   return (
@@ -62,7 +67,7 @@ export async function getStaticProps() {
   );
   const db = client.db();
 
-  const todoCollection = db.collection('todolist');
+  const todoCollection = db.collection("todolist");
   const result = await todoCollection.find().toArray();
   client.close();
 

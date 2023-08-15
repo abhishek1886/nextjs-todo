@@ -32,7 +32,6 @@ async function handler(req, res) {
           .json({ message: "Successfully updated!", data: result });
       }
     } catch (error) {
-      console.log(error);
       res.status(500).json({ message: "Internal server error" });
     } finally {
       client.close();
