@@ -25,21 +25,14 @@ const CompletedTodos = (props) => {
   };
 
   const completedTodosListElement = completedTodos.reverse().map((todo) => (
-    <Fragment>
-      <li
-        className="flex mb-4 group items-center border-b-2 border-[#c2b2dc] pb-2"
-        id={todo.id}
-        key={todo.id}
-      >
-        <p className="w-full text-grey-darkest">{todo.title}</p>
-      </li>
-      <button
-        className="hidden group-hover:block flex-no-shrink px-2 py-1 ml-2 border-2 rounded text-red border-red hover:text-white hover:bg-red"
-        onClick={() => deleteTodoHandler(todo.id)}
-      >
-        Remove
-      </button>
-    </Fragment>
+    <TodoItem
+      key={todo.id}
+      id={todo.id}
+      isCompleted={todo.isCompleted}
+      title={todo.title} 
+      onDelete={deleteTodoHandler}
+      type="completedTodo"
+     />
   ));
   return (
     <Fragment>

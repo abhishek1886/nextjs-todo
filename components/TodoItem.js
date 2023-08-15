@@ -46,14 +46,14 @@ const TodoItem = (props) => {
         <p className="w-full text-grey-darkest">{props.title}</p>
       )}
 
-      <button
+      {props.type === 'todo' && <button
 
         className="hidden group-hover:block flex-no-shrink px-2 py-1 ml-4 mr-2 border-2 rounded hover:text-white text-green disabled:bg-gray-500 border-green hover:bg-green"
         onClick={updateTodoHandler}
         disabled={done}
       >
         Done
-      </button>
+      </button>}
       <button
 
         className="hidden group-hover:block flex-no-shrink px-2 py-1 ml-2 border-2 rounded text-red border-red hover:text-white hover:bg-red"

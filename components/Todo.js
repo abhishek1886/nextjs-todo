@@ -11,6 +11,7 @@ const Todo = (props) => {
       isCompleted={todo.isCompleted}
       title={todo.title} 
       onDelete={props.onDelete}
+      type="todo"
      />
   ))
 
