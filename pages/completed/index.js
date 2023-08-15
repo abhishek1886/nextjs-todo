@@ -28,19 +28,24 @@ const CompletedTodos = (props) => {
 };
 
 export async function getStaticProps() {
-  let url = 'http://localhost:3000';
-    const vc = process.env.VERCEL_URL;
-    if(vc){
-      url = `http://${vc}`
-    }
-  const response = await fetch(`${url}/api/todo-data`);
+  const client = await MongoClient.connect(
+    "mongodb+srv://guptaabhishek1886:a1b7h7i0s1h3ek@cluster0.cd9v7gq.mongodb.net/todolist?retryWrites=true&w=majority"
+  );
+  const db = client.db();
 
-  const res = await response.json();
-  const data = res.data;
+  const todoCollection = db.collection("todolist");
+  const result = await todoCollection.find().toArray();
+  client.close();
+
   return {
     props: {
-      todoData: data,
+      todoData: result.reverse().map((todo) => ({
+        title: todo.title,
+        isCompleted: todo.isCompleted,
+        id: todo._id.toString(),
+      })),
     },
+    revalidate: 1,
   };
 }
 

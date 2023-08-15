@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import { Fragment, useEffect, useState } from "react";
 
 import Header from "@/components/Header";
@@ -5,12 +6,6 @@ import Todo from "@/components/Todo";
 
 export default function Home(props) {
   const [todos, setTodos] = useState([]);
-
-  let url = 'http://localhost:3000';
-    const vc = process.env.VERCCEL_URL;
-    if(vc){
-      url = `http://${vc}`
-    }
 
   const addTodoHandler = async (todoData) => {
     const data = { title: todoData, isCompleted: false };
@@ -62,22 +57,21 @@ export default function Home(props) {
 }
 
 export async function getStaticProps() {
-  let url = 'http://localhost:3000';
-    const vc = process.env.VERCEL_URL;
-    if(vc){
-      url = `http://${vc}`
-    }
-  const response = await fetch(`${url}/api/todo-data`);
+  const client = await MongoClient.connect(
+    "mongodb+srv://guptaabhishek1886:a1b7h7i0s1h3ek@cluster0.cd9v7gq.mongodb.net/todolist?retryWrites=true&w=majority"
+  );
+  const db = client.db();
 
-  const res = await response.json();
-  const data = res.data;
+  const todoCollection = db.collection('todolist');
+  const result = await todoCollection.find().toArray();
+  client.close();
 
   return {
     props: {
-      todoData: data.reverse().map((todo) => ({
+      todoData: result.reverse().map((todo) => ({
         title: todo.title,
         isCompleted: todo.isCompleted,
-        id: todo._id,
+        id: todo._id.toString(),
       })),
     },
     revalidate: 1,
