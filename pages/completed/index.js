@@ -3,7 +3,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import Header from "@/components/Header";
 
 const CompletedTodos = (props) => {
-  const [completedTodos, setCompletedTodos] = useState();
+  const [completedTodos, setCompletedTodos] = useState([]);
 
   useEffect(() => {
     const completedTodosList = props.todoData.filter((todo) => todo.isCompleted);
