@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  button {
+    @apply bg-[#bc6cf9];
+    @apply hover:bg-[#9c41f4];
+    @apply text-white;
+    @apply py-1
+  }
+}
