@@ -1,18 +1,45 @@
 import { MongoClient } from "mongodb";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Header from "@/components/Header";
 
 const CompletedTodos = (props) => {
-  const completedTodos = props.todoData.filter((todo) => todo.isCompleted);
+  const [completedTodos, setCompletedTodos] = useState();
+
+  useEffect(() => {
+    const completedTodosList = props.todoData.filter((todo) => todo.isCompleted);
+    setCompletedTodos(completedTodosList);
+  }, []);
+
+  const deleteTodoHandler = async (id) => {
+    const url = "https://nextjs-todo-qgx1a733u-abhishek1886.vercel.app/";
+    const updatedData = completedTodos.filter((todo) => todo.id !== id);
+    setCompletedTodos(updatedData);
+
+    const response = await fetch(`${url}/api/delete-todo`, {
+      method: "DELETE",
+      body: JSON.stringify({ id: id }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
 
   const completedTodosListElement = completedTodos.reverse().map((todo) => (
-    <li
-      className="flex mb-4 group items-center border-b-2 border-[#c2b2dc] pb-2"
-      id={todo.id}
-      key={todo.id}
-    >
-      <p className="w-full text-grey-darkest">{todo.title}</p>
-    </li>
+    <Fragment>
+      <li
+        className="flex mb-4 group items-center border-b-2 border-[#c2b2dc] pb-2"
+        id={todo.id}
+        key={todo.id}
+      >
+        <p className="w-full text-grey-darkest">{todo.title}</p>
+      </li>
+      <button
+        className="hidden group-hover:block flex-no-shrink px-2 py-1 ml-2 border-2 rounded text-red border-red hover:text-white hover:bg-red"
+        onClick={() => deleteTodoHandler(todo.id)}
+      >
+        Remove
+      </button>
+    </Fragment>
   ));
   return (
     <Fragment>
