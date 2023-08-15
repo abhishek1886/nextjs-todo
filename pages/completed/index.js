@@ -1,3 +1,4 @@
+import { MongoClient } from "mongodb";
 import React, { Fragment } from "react";
 import Header from "@/components/Header";
 
@@ -8,6 +9,7 @@ const CompletedTodos = (props) => {
     <li
       className="flex mb-4 group items-center border-b-2 border-[#c2b2dc] pb-2"
       id={todo.id}
+      key={todo.id}
     >
       <p className="w-full text-grey-darkest">{todo.title}</p>
     </li>
